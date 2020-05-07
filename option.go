@@ -1,7 +1,20 @@
 package fuzzyfinder
 
-import (
-	"github.com/gdamore/tcell/termbox"
+// Attribute affects the presentation of characters, such as color, boldness,
+// and so forth.
+type Attribute uint16
+
+// Colors for prompt. The order here is significant.
+const (
+	ColorDefault Attribute = iota
+	ColorBlack
+	ColorRed
+	ColorGreen
+	ColorYellow
+	ColorBlue
+	ColorMagenta
+	ColorCyan
+	ColorWhite
 )
 
 type opt struct {
@@ -28,7 +41,7 @@ const (
 
 var defaultOption = opt{
 	promptString: "> ",
-	promptColor:  termbox.ColorBlue,
+	promptColor:  ColorBlue,
 }
 
 // Option represents available fuzzy-finding options.
@@ -71,7 +84,7 @@ func WithPromptString(s string) Option {
 }
 
 // WithPromptString changes the prompt string. The default value is "> ".
-func WithPromptColor(c termbox.Attribute) Option {
+func WithPromptColor(c Attribute) Option {
 	return func(o *opt) {
 		o.promptColor = c
 	}
