@@ -23,7 +23,7 @@ type opt struct {
 	multi        bool
 	hotReload    bool
 	promptString string
-	promptColor  termbox.Attribute
+	promptColor  Attribute
 }
 
 type mode int
