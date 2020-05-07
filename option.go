@@ -1,20 +1,7 @@
 package fuzzyfinder
 
-// Attribute affects the presentation of characters, such as color, boldness,
-// and so forth.
-type Attribute uint16
-
-// Colors for prompt. The order here is significant.
-const (
-	ColorDefault Attribute = iota
-	ColorBlack
-	ColorRed
-	ColorGreen
-	ColorYellow
-	ColorBlue
-	ColorMagenta
-	ColorCyan
-	ColorWhite
+import (
+	"github.com/nsf/termbox-go"
 )
 
 type opt struct {
@@ -23,7 +10,7 @@ type opt struct {
 	multi        bool
 	hotReload    bool
 	promptString string
-	promptColor  Attribute
+	promptColor  termbox.Attribute
 }
 
 type mode int
@@ -41,7 +28,7 @@ const (
 
 var defaultOption = opt{
 	promptString: "> ",
-	promptColor:  ColorBlue,
+	promptColor:  termbox.ColorBlue,
 }
 
 // Option represents available fuzzy-finding options.
@@ -84,7 +71,7 @@ func WithPromptString(s string) Option {
 }
 
 // WithPromptString changes the prompt string. The default value is "> ".
-func WithPromptColor(c Attribute) Option {
+func WithPromptColor(c termbox.Attribute) Option {
 	return func(o *opt) {
 		o.promptColor = c
 	}
